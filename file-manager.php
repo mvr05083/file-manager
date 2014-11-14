@@ -40,9 +40,7 @@ define('GB', 1073741824);
 define('TB', 1099511627776);
 define('HASH', 'd41d8cd98f00b204e9800998ecf8427e');
 
+require_once ( FILE_MANAGER_DIR . "public/mkfm-public-init.php");
+//require_once ( FILE_MANAGER_DIR . 'admin/mkfm-admin-init.php');
 
-require_once ( FILE_MANAGER_DIR . "activate.php" );
-require_once ( FILE_MANAGER_DIR . "utilities/setTable.php");
-require_once ( FILE_MANAGER_DIR . 'utilities/getContent.php');
-
-register_activation_hook( __FILE__, 'fm_install' );
+register_activation_hook( __FILE__, 'mkfm_db_init' );
