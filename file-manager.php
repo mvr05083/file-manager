@@ -34,11 +34,11 @@ define( 'FILE_MANAGER_DIR', plugin_dir_path ( __FILE__ ) );
 define( 'FILE_MANAGER_URL', plugin_dir_url ( __FILE__ ) );
 define( 'WP_PREFIX', $wpdb->prefix );
 define( 'DOCUMENT_ROOT', plugin_dir_path ( __FILE__ ) . "../../uploads" );
-define('KB', 1024);
-define('MB', 1048576);
-define('GB', 1073741824);
-define('TB', 1099511627776);
-define('HASH', 'd41d8cd98f00b204e9800998ecf8427e');
+define( 'KB', 1024 );
+define( 'MB', 1048576 );
+define( 'GB', 1073741824 );
+define( 'TB', 1099511627776 );
+define( 'HASH', 'd41d8cd98f00b204e9800998ecf8427e' );
 
 
 require_once ( FILE_MANAGER_DIR . "activate.php" );

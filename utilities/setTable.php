@@ -20,6 +20,5 @@ function fm_install(){
 			) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;";
 
 	$wpdb->query( $sql );
-//	require_once( ABSPATH . 'wp-admin/includes/upgrade.php');
-//	dbDelta( $sql );
+
 }

@@ -2,7 +2,6 @@
 include_once FILE_MANAGER_DIR . "utilities/utils.php";
 function display_constants(){
 	getFiles( DOCUMENT_ROOT );
-	return $cons;
 }
 add_shortcode( 'display_constants', 'display_constants' );
 
