@@ -29,16 +29,18 @@
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
+$wp = wp_upload_dir();
 
 define( 'FILE_MANAGER_DIR', plugin_dir_path ( __FILE__ ) );
 define( 'FILE_MANAGER_URL', plugin_dir_url ( __FILE__ ) );
 define( 'WP_PREFIX', $wpdb->prefix );
-define( 'DOCUMENT_ROOT', plugin_dir_path ( __FILE__ ) . "../../uploads" );
+//define( 'DOCUMENT_ROOT', get_option( 'upload_path', plugin_dir_path ( __FILE__ ) . "../../uploads" ) );
+define( 'DOCUMENT_ROOT', $wp['basedir'] );
 define( 'KB', 1024 );
 define( 'MB', 1048576 );
 define( 'GB', 1073741824 );
 define( 'TB', 1099511627776 );
-define( 'HASH', 'd41d8cd98f00b204e9800998ecf8427e' );
+define( 'HASH_KEY', 'd41d8cd98f00b204e9800998ecf8427e' );
 
 require_once ( FILE_MANAGER_DIR . "public/mkfm-public-init.php");
 //require_once ( FILE_MANAGER_DIR . 'admin/mkfm-admin-init.php');
