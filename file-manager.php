@@ -35,7 +35,7 @@ define( 'FILE_MANAGER_DIR', plugin_dir_path ( __FILE__ ) );
 define( 'FILE_MANAGER_URL', plugin_dir_url ( __FILE__ ) );
 define( 'WP_PREFIX', $wpdb->prefix );
 //define( 'DOCUMENT_ROOT', get_option( 'upload_path', plugin_dir_path ( __FILE__ ) . "../../uploads" ) );
-define( 'DOCUMENT_ROOT', $wp['basedir'] );
+define( 'DOCUMENT_ROOT', str_replace( "\\", "/", $wp['basedir'] ) );
 define( 'KB', 1024 );
 define( 'MB', 1048576 );
 define( 'GB', 1073741824 );

@@ -10,7 +10,19 @@ function mkfm_enqueue_all() {
 
 function mkfm_register_scripts() {
     if ( ! is_admin() ){
-        wp_register_script( 'mkfm-file-manager-script', 
+        wp_register_script( 'mkfm-foundation',
+                            FILE_MANAGER_URL . 'public/assets/js/foundation.min.js',
+                            array(),
+                            '1.0',
+                            true
+                          );
+         wp_register_script( 'mkfm-foundation-reveal',
+                            FILE_MANAGER_URL . 'public/assets/js/foundation.reveal.js',
+                            array('mkfm-foundation'),
+                            '1.0',
+                            true
+                          );
+         wp_register_script( 'mkfm-file-manager-script', 
                             FILE_MANAGER_URL . 'public/assets/js/file-manager.js', 
                             array('jquery'),
                             '1.0',
@@ -29,6 +41,8 @@ function mkfm_localize_scripts() {
 
 function mkfm_enqueue_scripts() {
     if ( ! is_admin() ) {
+        wp_enqueue_script( 'mkfm-foundation' );
+        wp_enqueue_script( 'mkfm-foundation-reveal' );
         wp_enqueue_script( 'mkfm-file-manager-script' );
     }
 }

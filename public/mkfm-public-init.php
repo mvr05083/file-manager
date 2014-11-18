@@ -4,6 +4,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 require_once( 'includes/mkfm_public_get_file_handler.php' );
+require_once( 'includes/mkfm_public_add_folder.php' );
 require_once( 'includes/mkfm_public_enqueue.php' );
 require_once( 'includes/mkfm_public_db_init.php' );
 
@@ -18,8 +19,10 @@ function mkfm_db_init(){
 }
 
 function mkfm_add_functions() {
-    add_action('wp_ajax_mkfm_refresh_list', 'mkfm_refresh_list');
-    add_action('wp_ajax_nopriv_mkfm_refresh_list', 'mkfm_refresh_list');
+    add_action( 'wp_ajax_mkfm_refresh_list', 'mkfm_refresh_list' );
+    add_action( 'wp_ajax_nopriv_mkfm_refresh_list', 'mkfm_refresh_list' );
+    add_action( 'wp_ajax_mkfm_add_folder', 'mkfm_add_folder' );
+    add_action( 'wp_ajax_nopriv_mkfm_add_folder', 'mkfm_add_folder' );
     add_action( 'init', 'mkfm_enqueue_styles_scripts' );
 
     add_shortcode( 'show_files', 'mkfm_show_files_shortcode' );
