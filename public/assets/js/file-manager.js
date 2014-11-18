@@ -45,8 +45,10 @@ jQuery(document).ready( function() {
                     new_folder_name : folder_name},
             success: function(response) {
                 jQuery("#messages").html(response);
+                jQuery('#mkfm-add-folder-text-box').val('');
                 jQuery('#mkfm-refresh').trigger("click");
                 jQuery('#mkfm-close-add-folder').trigger("click");
+                jQuery("#messages").delay(2000).fadeOut("slow");
             }
         });  
     });   
