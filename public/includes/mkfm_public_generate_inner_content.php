@@ -3,14 +3,21 @@
 function mkfm_print_menu() {
     $result .= "<ul class='small-block-grid-2 medium-block-grid-4 large-block-grid-4'>";
     $result .= "<li><a class='alert-box primary' id='mkfm-home' href='#'>Home</a></li>";
-    $result .= "<li><a class='alert-box secondary' value='" . DOCUMENT_ROOT ."' id='mkfm-refresh' href='#'>Refresh</a></li>";
+    $result .= "<li><a class='alert-box warning' value='" . DOCUMENT_ROOT ."' id='mkfm-refresh' href='#'>Refresh</a></li>";
     $result .= "<li><a class='alert-box success' data-reveal-id='mkfm-add-folder-modal' href='#'>Add Folder</a></li>";
+    $result .= "<li><a class='alert-box secondary' data-reveal-id='mkfm-upload-file-modal' href='#'>Upload File</a></li>";
     // Add Folder modal
     $result .= "<div id='mkfm-add-folder-modal' class='reveal-modal' data-reveal>";
     $result .= "<a id='mkfm-close-add-folder' class='close-reveal-modal'>&#215;</a>";
     $result .= "<input type='text' id='mkfm-add-folder-text-box' />";
     $result .= "<a id='mkfm-add-folder-submit'href='#' class='alert-box success'>Add Folder</a></div>";
-    
+    // Upload File modal
+    $result .= "<div id='mkfm-upload-file-modal' class='reveal-modal' data-reveal>";
+    $result .= "<a id='mkfm-close-add-folder' class='close-reveal-modal'>&#215;</a>";
+    $result .= '<form action="" id="upload-form">';
+    $result .= '<input type="file" id="fileToUpload"/><br/><div id="progressbar"></div>';
+    $result .= '<button id="upload_btn">Start Uploading</button></form></div>';
+
     $result .= "</ul><div id='messages'></div><div id='output'>";
     
     

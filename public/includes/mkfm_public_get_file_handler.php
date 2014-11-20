@@ -32,7 +32,7 @@ function mkfm_show_files() {
             $cons .= $file;
         }
     }
-    $cons .= "</ul>";
+    $cons .= "</ul></div>";
 	return $cons;
 }
 
@@ -74,6 +74,5 @@ function mkfm_get_current_dir() {
     } else {
         $current_dir = DOCUMENT_ROOT;
     }
-    
     return $current_dir;
 }
