@@ -13,10 +13,10 @@ function mkfm_print_menu() {
     $result .= "<a id='mkfm-add-folder-submit'href='#' class='alert-box success'>Add Folder</a></div>";
     // Upload File modal
     $result .= "<div id='mkfm-upload-file-modal' class='reveal-modal' data-reveal>";
-    $result .= "<a id='mkfm-close-add-folder' class='close-reveal-modal'>&#215;</a>";
-    $result .= '<form action="" id="upload-form">';
-    $result .= '<input type="file" id="fileToUpload"/><br/><div id="progressbar"></div>';
-    $result .= '<button id="upload_btn">Start Uploading</button></form></div>';
+    $result .= "<a id='mkfm-close-upload-file' class='close-reveal-modal'>&#215;</a>";
+    $result .= '<form id="upload-form" action="" method="post" enctype="multipart/form-data">';
+    $result .= 'Select image to upload:<input type="file" name="fileToUpload" id="fileToUpload" multiple>';
+    $result .= '<input type="submit" id="mkfm-upload-file-submit" value="Upload Image" name="submit"></form></div>';
 
     $result .= "</ul><div id='messages'></div><div id='output'>";
     
