@@ -63,17 +63,21 @@ jQuery(document).ready( function() {
         console.log(jQuery("#fileToUpload")[0].files);
         if (window.FormData){
             var formdata = new FormData();
-            formdata.append('files', jQuery("#fileToUpload")[0].files);
+            formdata.append('files', jQuery("#fileToUpload")[0].files[0]);
             if (formdata){
                 jQuery.ajax({
                     url: myAjax.ajaxurl + "?action=mkfm_upload_file",
                     type: "POST",
+                    dataType: "json",
                     data: formdata,
                     processData: false, //Work around #1
                     contentType: false, //Work around #2
                     success: function(response){
+                        jQuery("#messages").show();
                         jQuery("#messages").html(response);
                         jQuery("#mkfm-close-upload-file").trigger("click");
+                        jQuery("#mkfm-refresh").trigger("click");
+                        jQuery("#messages").delay(2000).fadeOut("slow");
                     },
                     error: function(xhr){alert("Failed: " + xhr.error);}
                 })
