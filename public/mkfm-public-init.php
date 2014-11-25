@@ -3,6 +3,7 @@
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
+// TODO: Create entries in upload directory for already existing folders/files
 require_once( 'includes/mkfm_public_get_file_handler.php' );
 require_once( 'includes/mkfm_public_add_folder.php' );
 require_once( 'includes/mkfm_public_upload_file.php' );

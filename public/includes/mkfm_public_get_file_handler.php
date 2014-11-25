@@ -48,7 +48,6 @@ function mkfm_get_files() {
 				$result['files'][] = mkfm_format_file ( $file, $counter );
                 $counter++;
             }
-            
 		}
 	}
     return $result;
