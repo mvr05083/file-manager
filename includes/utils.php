@@ -4,12 +4,9 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-/********/
-/*  C   */
-/********/
-function createHash(){
+function mkfm_create_hash(){
     $time = time();
-    return $hash = md5(HASH . $time);;
+    return $hash = (HASH . $time);;
 }
 
 /********/

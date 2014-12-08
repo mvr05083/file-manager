@@ -9,6 +9,7 @@ require_once( 'includes/mkfm_public_add_folder.php' );
 require_once( 'includes/mkfm_public_upload_file.php' );
 require_once( 'includes/mkfm_public_enqueue.php' );
 require_once( 'includes/mkfm_public_db_init.php' );
+require_once( 'includes/mkfm_public_utils.php' );
 
 mkfm_add_functions();
 
@@ -34,4 +35,6 @@ function mkfm_add_functions() {
     add_action( 'init', 'mkfm_enqueue_styles_scripts' );
 
     add_shortcode( 'show_files', 'mkfm_show_files_shortcode' );
+    
+    mkfm_initialize_document_root();
 }

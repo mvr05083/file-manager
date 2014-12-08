@@ -1,8 +1,13 @@
 <?php 
+if ( ! defined( 'WPINC' ) ) {
+	die('There is no access here.');
+}
 
 require_once( 'mkfm_public_get_file_handler.php' );
 
 function mkfm_add_folder() {
+    check_ajax_referer( 'ajax_verify', 'security' );
+    
     if ( isset( $_REQUEST['new_folder_name'] ) ) {
         $folder_name = $_REQUEST['new_folder_name'];
     } else {
@@ -16,12 +21,15 @@ function mkfm_add_folder() {
        
     } else {
         if ( mkdir( $target_dir, 0755 ) ) {
-            //TODO: create the utilities for calling the database
-            //insertNew(createHash($target_dir), $target_dir, 1);
+            mkfm_insert( array( 'file_key' => mkfm_create_file_key(), 
+                                'file_path' => $target_dir, 
+                                'is_directory' => 1, 
+                                'revision' => 1 ) 
+                       );
             echo json_encode( "<div id='folder-message' class='alert-box success'>". basename($target_dir) ." created.</div>" );
             die();
         } else {
-            echo json_encode( "<div id='folder-message' class='alert-box warning'>There was an error creating the folder.</div>" );
+            echo json_encode( "<div id='folder-message' class='alert-box warning'>There was an error creating the folder. Please check folders.</div>" );
             die();
         }
     }

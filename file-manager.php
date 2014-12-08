@@ -15,10 +15,9 @@
  * @wordpress-plugin
  * Plugin Name:       File Manager
  * Plugin URI:        http://example.com/plugin-name-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress dashboard.
+ * Description:       Turns your wordpress installation into a simple to configure, simple to use file hosting service.
  * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Author:            Mike Redmond
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       plugin-name
@@ -29,20 +28,77 @@
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
-$wp = wp_upload_dir();
 
+$wpdb->show_errors();
+
+/**
+ * Path to the home of the plugin.
+ *
+ * @since 1.0.0
+ * @var string FILE_MANAGER_DIR Uses WordPress plugin_dir_path to 
+ * create a constant that can be used on any operating system, or 
+ * file structure. This constant is used to reference resources
+ * relative to the plugin.
+ */
 define( 'FILE_MANAGER_DIR', plugin_dir_path ( __FILE__ ) );
+
+/**
+ * URL to the home of the plugin.
+ *
+ * @since 1.0.0
+ * @var string FILE_MANAGER_URL Uses WordPress plugin_dir_url to 
+ * create a constant that can be used on any operating system, or 
+ * file structure. This constant is used to reference resources
+ * relative to the plugin, namely css, js, and images.
+ */
 define( 'FILE_MANAGER_URL', plugin_dir_url ( __FILE__ ) );
+
+/**
+ * Prefix of the installed WordPress database. 
+ *
+ * @since 1.0.0
+ * @var string WP_PREFIX is the prefix of the MySQL database.
+ * This is used when accessing the database. This ensures 
+ * that this plugin can be univserally used with different 
+ * database prefixes.
+ */
 define( 'WP_PREFIX', $wpdb->prefix );
-//define( 'DOCUMENT_ROOT', get_option( 'upload_path', plugin_dir_path ( __FILE__ ) . "../../uploads" ) );
+
+/**
+ * The upload directory of the plugin.
+ *
+ * @since 1.0.0
+ * @var string DOCUMENT_ROOT uses a built in WordPress function
+ * wp_upload_dir to access the 'basedir' which returns the path to 
+ * the upload file. This is used to construct the proper path to 
+ * each file and folder.
+ */
+$wp = wp_upload_dir();
 define( 'DOCUMENT_ROOT', str_replace( "\\", "/", $wp['basedir'] ) );
+
+/**
+ * File size constand
+ *
+ * @since 1.0.0
+ * @var string KB, MB, GB, TB are all constants that pre-define 
+ * the corresponding memory size. This is mostly used in limiting 
+ * the file upload size.
+ */
 define( 'KB', 1024 );
 define( 'MB', 1048576 );
 define( 'GB', 1073741824 );
 define( 'TB', 1099511627776 );
-define( 'HASH_KEY', 'd41d8cd98f00b204e9800998ecf8427e' );
 
-require_once ( FILE_MANAGER_DIR . "public/mkfm-public-init.php");
-//require_once ( FILE_MANAGER_DIR . 'admin/mkfm-admin-init.php');
+/**
+ * SHA1 hash key.
+ *
+ * @since 1.0.0
+ * @var string HASH_KEY is one of the elements used in creating the 
+ * key_file.
+ */
+define( 'HASH_KEY', 'da39a3ee5e6b4b0d3255bfef95601890afd80709' );
+
+
+require_once ( FILE_MANAGER_DIR . "public/mkfm-public-init.php" );
 
 register_activation_hook( __FILE__, 'mkfm_db_init' );

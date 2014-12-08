@@ -4,7 +4,8 @@ jQuery( document ).ready(  function(  ) {
     jQuery( document ).foundation(  );
     
     // Handle Home button
-    jQuery( document ).on( "click", "#mkfm-home",  function(  ) {
+    jQuery( document ).on( "click", "#mkfm-home",  function( event ) {
+        event.preventDefault(  );
         jQuery( "#messages" ).html( "" ).show(  );
         jQuery.ajax( {
             type : "post",
@@ -13,6 +14,10 @@ jQuery( document ).ready(  function(  ) {
             data : {action: "mkfm_refresh_list"},
             success: function( response ) {
                 jQuery( "#output" ).html( response );
+                jQuery( "#mkfm-refresh" ).attr( "value", '' );
+            },
+            error: function ( response ) {
+                alert( "Failed" );
             }
         } );  
         jQuery( "#messages" ).delay( 2000 ).fadeOut( "slow" );
@@ -21,6 +26,7 @@ jQuery( document ).ready(  function(  ) {
     // Handle refreshing list, and folder navigation
     // TODO: determine better element stucture to encapulate all clicks
     jQuery( document ).on( "click", ".folder img, .breadcrumb-link, #mkfm-refresh",  function( event ) {
+        event.preventDefault(  );
         var path = '';
         if (  event.target.getAttribute( 'value' ) != null || event.target.getAttribute( 'value' ) != undefined  ) {
             path = event.target.getAttribute( 'value' );
@@ -35,6 +41,9 @@ jQuery( document ).ready(  function(  ) {
             success: function( response ) {
                 jQuery( "#output" ).html( response );
                 jQuery( "#mkfm-refresh" ).attr( "value", path );
+            },
+            error: function ( response ) {
+                alert("Failed: " + path);
             }
         } );  
     } );    
@@ -48,7 +57,9 @@ jQuery( document ).ready(  function(  ) {
             dataType : "json",
             url : myAjax.ajaxurl,
             data : {action: 'mkfm_add_folder', 
-                    new_folder_name : folder_name},
+                    new_folder_name : folder_name,
+                    security: myAjax.ajax_nonce
+                   },
             success: function( response ) {
                 jQuery( "#messages" ).show(  );
                 jQuery( "#messages" ).html( response );
@@ -56,6 +67,9 @@ jQuery( document ).ready(  function(  ) {
                 jQuery( "#mkfm-close-upload-file" ).trigger( "click" );
                 jQuery( "#mkfm-refresh" ).trigger( "click" );
                 jQuery( "#messages" ).delay( 2000 ).fadeOut( "slow" );
+            },
+            error: function ( reponse ) {
+                alert( "Failed" );
             }
         } );  
     } );  
@@ -69,7 +83,7 @@ jQuery( document ).ready(  function(  ) {
             formdata.append( 'files', jQuery( "#fileToUpload" )[0].files[0] );
             if ( formdata ){
                 jQuery.ajax( {
-                    url: myAjax.ajaxurl + "?action=mkfm_upload_file",
+                    url: myAjax.ajaxurl + "?action=mkfm_upload_file&security=" + myAjax.ajax_nonce,
                     type: "POST",
                     dataType: "json",
                     data: formdata,
@@ -83,7 +97,9 @@ jQuery( document ).ready(  function(  ) {
                         jQuery( "#mkfm-refresh" ).trigger( "click" );
                         jQuery( "#messages" ).delay( 2000 ).fadeOut( "slow" );
                     },
-                    error: function( xhr ){alert( "Failed: " + xhr.error );}
+                    error: function( xhr ){
+                        alert( "Failed: " + xhr.error );
+                    }
                 } )
             }
         } else {

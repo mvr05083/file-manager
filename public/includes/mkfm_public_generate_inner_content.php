@@ -1,9 +1,11 @@
 <?php
 
+require_once( 'mkfm_public_db_utils.php' );
+
 function mkfm_print_menu() {
     $result .= "<ul class='small-block-grid-2 medium-block-grid-4 large-block-grid-4'>";
     $result .= "<li><a class='alert-box primary' id='mkfm-home' href='#'>Home</a></li>";
-    $result .= "<li><a class='alert-box warning' value='" . DOCUMENT_ROOT ."' id='mkfm-refresh' href='#'>Refresh</a></li>";
+    $result .= "<li><a class='alert-box warning' value='" . mkfm_get_file_key( DOCUMENT_ROOT ) ."' id='mkfm-refresh' href='#'>Refresh</a></li>";
     $result .= "<li><a class='alert-box success' data-reveal-id='mkfm-add-folder-modal' href='#'>Add Folder</a></li>";
     $result .= "<li><a class='alert-box secondary' data-reveal-id='mkfm-upload-file-modal' href='#'>Upload File</a></li>";
     // Add Folder modal
@@ -26,7 +28,7 @@ function mkfm_print_menu() {
 
 function mkfm_format_folder ( $folder ) {
     $return  = "<li class='text-center'><a class='folder' href='#'>";
-    $return .= "<img class='icon' value='$folder' src='" . FILE_MANAGER_URL;
+    $return .= "<img class='icon' value='". mkfm_get_file_key( $folder ) . "' src='" . FILE_MANAGER_URL;
     $return .= "public/assets/img/folder.png' alt='folder' /><p>" . basename( $folder ) . "</p></a></li>";
     return $return;
 }
