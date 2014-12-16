@@ -24,11 +24,15 @@
  * Domain Path:       /languages
  */
 
-// If this file is called directly, abort.
+/**
+ * Prevents any direct access to this page through the browser
+ */
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
+// DEBUGGING PURPOSES ONLY
+// DO NOT INCLUDE IN PRODUCTION
 $wpdb->show_errors();
 
 /**
@@ -98,7 +102,12 @@ define( 'TB', 1099511627776 );
  */
 define( 'HASH_KEY', 'da39a3ee5e6b4b0d3255bfef95601890afd80709' );
 
-
+/**
+ * Begins initialization of the public facing application used 
+ * when the shortcode is found on a page.
+ */
 require_once ( FILE_MANAGER_DIR . "public/mkfm-public-init.php" );
 
+
+//TODO: Add options setup in this step
 register_activation_hook( __FILE__, 'mkfm_db_init' );

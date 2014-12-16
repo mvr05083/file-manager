@@ -1,15 +1,38 @@
 <?php 
 
+/**
+ * Prevents any direct access to this page through the browser
+ */
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
+
+/**
+ * Allows access to helper functions
+ */
+//require_once( 'mkfm_public_db_utils.php' );
 
 if( ! isset( $_SESSION ) ) {
     session_start( );
 }
 
-require_once( 'mkfm_public_db_utils.php' );
-
+/**
+ * mkfm_encrypt
+ *
+ * Recursively searches through the entire directory structutre, 
+ * starting with DOCUMENT_ROOT. It then checks to see if the 
+ * file already exists in the database.
+ *
+ * @since 1.0.0
+ * @access public
+ * 
+ * @package FileManager
+ * @see mkfm_check_if_exists
+ *
+ * @param string $entry is the absolute path to the file
+ * 
+ * @return string containing the sha1 encrypted value
+ */
 function mkfm_encrypt( $entry ) {
     return sha1( $entry );
 }
@@ -23,7 +46,8 @@ function mkfm_encrypt( $entry ) {
  *
  * @since 1.0.0
  * @access public
- *
+ * 
+ * @package FileManager
  * @see mkfm_check_if_exists
  *
  * @global string DOCUMENT_ROOT stores the home directory for 
@@ -117,10 +141,4 @@ function mkfm_get_current_dir( ) {
         $current_dir = DOCUMENT_ROOT;
     }
     return $current_dir;
-}
-
-
-
-function mkfm_get_all( ) {
-    
 }

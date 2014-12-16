@@ -1,12 +1,15 @@
 <?php
 
+/**
+ * Prevents any direct access to this page through the browser
+ */
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
-require_once( 'mkfm_public_generate_inner_content.php' );
-require_once( 'mkfm_public_create_breadcrumb.php' );
-require_once( 'mkfm_public_utils.php' );
+//require_once( 'mkfm_public_generate_inner_content.php' );
+//require_once( 'mkfm_public_create_breadcrumb.php' );
+//require_once( 'mkfm_public_utils.php' );
 
 /**
  * mkfm_refresh_list
@@ -21,7 +24,7 @@ require_once( 'mkfm_public_utils.php' );
  * structures.
  */
 function mkfm_refresh_list() {
-    $result = json_encode( mkfm_show_files() );
+    $result = json_encode( mkfm_show_files() + "Hello");
     echo $result;
     die();
 }
@@ -46,15 +49,16 @@ function mkfm_show_files_shortcode() {
 /**
  * mkfm_show_files
  *
- * Creates a breadcrumb menu based on teh current working directory and then 
- * constucts a Foundation small block grid (unordered listed) that is used to 
- * create a responsive list to store the the list of folders and files
+ * Returns a fully constructed html structure (based on Foundation) 
+ * containing all folder and file entries.
  *
  * @since 1.0.0
  * @access public
  * 
- * @return string returns Foundation block grid with Folder and File within
- * each li.
+ * @see mkfm_get_files
+ * @see mkfm_create_breadcrumb
+ * 
+ * @return string 
  */
 function mkfm_show_files() {
     $results = mkfm_get_files();
@@ -77,18 +81,24 @@ function mkfm_show_files() {
 /**
  * mkfm_get_files
  *
- * Using the current directory, a multi-dimentional array is created with a list of
- * folders and files containing html structures.
+ * Returns a multi-dimentional array containing
+ * folder and file html structures.
  *
  * @since 1.0.0
  * @access public
  * 
- * @return array returns file/folder html structures.
+ * @see mkfm_format_folder
+ * @see mkfm_format_file
+ * @see mkfm_get_current_dir
+ * @see mkfm_set_dir
+ * 
+ * @return array 
  */
 function mkfm_get_files() {
     $counter = 0;
     mkfm_set_dir();
     $dir = mkfm_get_current_dir();
+    echo $dir;
     $files = scandir( $dir );
 	foreach ( $files as $file ) {
 		if ( ( $file != '.' ) && ( $file != '..' ) && ( $file != 'del' ) ) {

@@ -1,7 +1,14 @@
 <?php 
-require_once( 'mkfm_public_get_file_handler.php' );
-require_once( 'mkfm_public_db_utils.php' );
-require_once( 'mkfm_public_utils.php' );
+/**
+ * Prevents any direct access to this page through the browser
+ */
+if ( ! defined( 'WPINC' ) ) {
+	die('There is no access here.');
+}
+
+//require_once( 'mkfm_public_get_file_handler.php' );
+//require_once( 'mkfm_public_db_utils.php' );
+//require_once( 'mkfm_public_utils.php' );
 
 function mkfm_upload_file(){
     

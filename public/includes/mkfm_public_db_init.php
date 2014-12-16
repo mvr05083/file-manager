@@ -1,4 +1,10 @@
 <?php 
+/**
+ * Prevents any direct access to this page through the browser
+ */
+if ( ! defined( 'WPINC' ) ) {
+	die('There is no access here.');
+}
 
 function mkfm_create_db() {
     global $wpdb;

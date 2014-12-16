@@ -1,9 +1,12 @@
 <?php 
+/**
+ * Prevents any direct access to this page through the browser
+ */
 if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
-require_once( 'mkfm_public_get_file_handler.php' );
+//require_once( 'mkfm_public_get_file_handler.php' );
 
 function mkfm_add_folder() {
     check_ajax_referer( 'ajax_verify', 'security' );

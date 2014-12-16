@@ -1,15 +1,31 @@
 <?php 
+/**
+ * Database Utilities
+ *
+ * This file contains functions for performing frequent CRUD type
+ * database functions.
+ *
+ * @link URL
+ * @since 1.0.0
+ *
+ * @package WordPress
+ * @subpackage Database
+ */
+
+/**
+ * Prevents any direct access to this page through the browser
+ */
 if ( ! defined( 'WPINC' ) ) {
-	die( 'There is no access here.' );
+	die('There is no access here.');
 }
 
-require_once( 'mkfm_public_utils.php' );
+//require_once( 'mkfm_public_utils.php' );
 
 /**
  * mkfm_insert
  *
  * Checks the <wp-prefix>-uploads database table for the existence of
- * the current file. Files are checked on the absolute file path.
+ * the current file. File existence checked using the absolute file path.
  *
  * @since 1.0.0
  * @access public
@@ -47,7 +63,7 @@ function mkfm_insert( $path ) {
 function mkfm_check_if_exists( $path, $file_type ) {
     global $wpdb;
     
-    $exists = $wpdb->query( 'SELECT * FROM ' . WP_PREFIX . 'uploads WHERE file_path="' . $path . '"');
+    $exists = $wpdb->query( 'SELECT * FROM ' . WP_PREFIX . 'uploads WHERE file_path="' . $path . '"' );
     if ( $exists == 0 ) {
         mkfm_insert( array( 'file_key' => mkfm_create_file_key( $path ), 
                             'file_path' => $path, 
@@ -93,7 +109,7 @@ function mkfm_create_file_key ( $path ) {
  * @global database object $wpdb is a WordPress constant used for 
  * accessing the database.
  * 
- * @param file/directory $path is the path to the selected file/folder.
+ * @param string $path is the path to the selected file/folder.
  *
  * @return string returns a file_key value that contains a hashed value 
  * that maps to an absolute path.
@@ -117,7 +133,7 @@ function mkfm_get_file_key ( $path ) {
  * @global database object $wpdb is a WordPress constant used for accessing 
  * the database.
  * 
- * @param file/directory $file_key is a hashed value that maps to an 
+ * @param string $file_key is a hashed value that maps to an 
  * absolute path.
  *
  * @return string returns an absolute path to a file or folder.
