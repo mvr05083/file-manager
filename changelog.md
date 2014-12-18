@@ -18,7 +18,7 @@
 *   Convert "value" from path to file_key
 *   Create hooks within the application
 *   prefix all files, functions, and variables
-*   properly 
+*   implement activate, deactivate, and uninstall methods
     
 
     
