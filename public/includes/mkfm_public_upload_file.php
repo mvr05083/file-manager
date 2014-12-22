@@ -6,10 +6,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
-//require_once( 'mkfm_public_get_file_handler.php' );
-//require_once( 'mkfm_public_db_utils.php' );
-//require_once( 'mkfm_public_utils.php' );
-
 function mkfm_upload_file(){
     
     check_ajax_referer( 'ajax_verify', 'security' );

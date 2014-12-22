@@ -16,8 +16,11 @@ jQuery( document ).ready(  function(  ) {
                 jQuery( "#output" ).html( response );
                 jQuery( "#mkfm-refresh" ).attr( "value", '' );
             },
-            error: function ( response ) {
+            error: function ( response, error, erro2) {
                 alert( "Failed" );
+                console.log(response);
+                console.log(error);
+                console.log(erro2);
             }
         } );  
         jQuery( "#messages" ).delay( 2000 ).fadeOut( "slow" );
@@ -42,8 +45,10 @@ jQuery( document ).ready(  function(  ) {
                 jQuery( "#output" ).html( response );
                 jQuery( "#mkfm-refresh" ).attr( "value", path );
             },
-            error: function ( response ) {
-                alert("Failed: " + path);
+            error: function ( response, error, erro2 ) {
+                alert("Failed: " + path );
+                console.log(error);
+                console.log(erro2);
             }
         } );  
     } );    
@@ -68,8 +73,11 @@ jQuery( document ).ready(  function(  ) {
                 jQuery( "#mkfm-refresh" ).trigger( "click" );
                 jQuery( "#messages" ).delay( 2000 ).fadeOut( "slow" );
             },
-            error: function ( reponse ) {
+            error: function ( response, error, erro2 ) {
                 alert( "Failed" );
+                console.log(error);
+                console.log(erro2);
+                
             }
         } );  
     } );  

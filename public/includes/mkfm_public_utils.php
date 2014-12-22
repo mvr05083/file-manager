@@ -10,7 +10,6 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Allows access to helper functions
  */
-//require_once( 'mkfm_public_db_utils.php' );
 
 if( ! isset( $_SESSION ) ) {
     session_start( );
@@ -93,7 +92,7 @@ function mkfm_set_dir( ) {
     if ( isset( $_REQUEST['path_id'] ) && $_REQUEST['path_id'] != '' ) {
         $dir = $_REQUEST['path_id'];
     } else {
-        $dir = DOCUMENT_ROOT;
+        $dir = mkfm_get_file_key( DOCUMENT_ROOT );
     }
     mkfm_set_current_dir( $dir );
 }
@@ -114,15 +113,14 @@ function mkfm_set_dir( ) {
  * directory.
  */
 function mkfm_set_current_dir( $path ) {
+//    echo $path . "<br/>";
     $_SESSION['current_dir'] = $path;
 }
 
 /**
  * mkfm_get_current_dir
  *
- * Checks the 'current_dir' SESSION variable for a current 
- * working directory. This variable is updated upon each 
- * folder change. 
+ * Returns current directory
  *
  * @since 1.0.0
  * @access public
@@ -137,8 +135,11 @@ function mkfm_set_current_dir( $path ) {
 function mkfm_get_current_dir( ) {
     if ( isset( $_SESSION['current_dir'] ) ) {
         $current_dir = $_SESSION['current_dir'];
+//        echo "session: " . mkfm_get_file_path( $current_dir ) ."<br/>";
     } else {
-        $current_dir = DOCUMENT_ROOT;
+        $current_dir = mkfm_get_file_key( DOCUMENT_ROOT );
+//        echo "default: " . mkfm_get_file_path( $current_dir ) . "<br/>";
     }
-    return $current_dir;
+    
+    return mkfm_get_file_path( $current_dir );
 }

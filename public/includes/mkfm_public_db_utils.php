@@ -19,8 +19,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
-//require_once( 'mkfm_public_utils.php' );
-
 /**
  * mkfm_insert
  *
@@ -116,6 +114,7 @@ function mkfm_create_file_key ( $path ) {
  */
 function mkfm_get_file_key ( $path ) {
     global $wpdb;
+//    echo $path;
     $file_key = $wpdb->get_row( "SELECT file_key FROM " . WP_PREFIX . "uploads WHERE file_path='" . $path ."'" );
     
     return $file_key->file_key;

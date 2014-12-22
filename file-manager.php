@@ -33,7 +33,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // DEBUGGING PURPOSES ONLY
 // DO NOT INCLUDE IN PRODUCTION
-$wpdb->show_errors();
+//$wpdb->show_errors();
 
 /**
  * Path to the home of the plugin.

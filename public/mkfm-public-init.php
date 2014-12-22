@@ -17,7 +17,7 @@ require_once( 'includes/mkfm_public_db_utils.php' );
 require_once( 'includes/mkfm_public_utils.php' );
 require_once( 'includes/mkfm_public_content_generator.php' );
 
-
+mkfm_add_functions();
 
 /**
  * mkfm_enqueue_styles_scripts
@@ -81,5 +81,3 @@ function mkfm_add_functions() {
     
     mkfm_initialize_document_root();
 }
-
-mkfm_add_functions();

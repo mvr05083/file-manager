@@ -7,10 +7,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
-//require_once( 'mkfm_public_generate_inner_content.php' );
-//require_once( 'mkfm_public_create_breadcrumb.php' );
-//require_once( 'mkfm_public_utils.php' );
-
 /**
  * mkfm_refresh_list
  *
@@ -24,8 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
  * structures.
  */
 function mkfm_refresh_list() {
-    $result = json_encode( mkfm_show_files() + "Hello");
-    echo $result;
+    echo json_encode( mkfm_show_files() );
     die();
 }
 
@@ -61,16 +56,17 @@ function mkfm_show_files_shortcode() {
  * @return string 
  */
 function mkfm_show_files() {
+    
     $results = mkfm_get_files();
     $cons  = mkfm_create_breadcrumb( mkfm_get_current_dir() );
     $cons .= "<ul class='small-block-grid-2 medium-block-grid-4 large-block-grid-6'>";
 	if ( sizeof( $results['folders'] ) > 0 ) {
-        foreach ( $results['folders'] as $folder ) {
+        foreach( $results['folders'] as $folder ) {
             $cons .= $folder;
         }
     }
     if ( sizeof( $results['files'] ) > 0 ) {
-        foreach ( $results['files'] as $file ) {
+        foreach( $results['files'] as $file ) {
             $cons .= $file;
         }
     }
@@ -98,7 +94,6 @@ function mkfm_get_files() {
     $counter = 0;
     mkfm_set_dir();
     $dir = mkfm_get_current_dir();
-    echo $dir;
     $files = scandir( $dir );
 	foreach ( $files as $file ) {
 		if ( ( $file != '.' ) && ( $file != '..' ) && ( $file != 'del' ) ) {

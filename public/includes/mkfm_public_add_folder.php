@@ -6,6 +6,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
+
 function mkfm_add_folder() {
     check_ajax_referer( 'ajax_verify', 'security' );
     

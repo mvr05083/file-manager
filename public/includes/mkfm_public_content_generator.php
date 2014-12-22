@@ -6,8 +6,16 @@ if ( ! defined( 'WPINC' ) ) {
 	die('There is no access here.');
 }
 
-//require_once( 'mkfm_public_db_utils.php' );
-
+/**
+ * mkfm_print_menu
+ *
+ * Returns menu and modals
+ *
+ * @since 1.0.0
+ * @access public
+ * 
+ * @return string 
+ */
 function mkfm_print_menu() {
     $result .= "<ul class='small-block-grid-2 medium-block-grid-4 large-block-grid-4'>";
     $result .= "<li><a class='alert-box primary' id='mkfm-home' href='#'>Home</a></li>";
@@ -28,10 +36,23 @@ function mkfm_print_menu() {
 
     $result .= "</ul><div id='messages'></div><div id='output'>";
     
-    
     return $result;
 }
 
+/**
+ * mkfm_format_folder
+ *
+ * Returns folder html list structure
+ *
+ * @since 1.0.0
+ * @access public
+ * 
+ * @see mkfm_get_file_key
+ * 
+ * @param string $folder Contains the path to folder
+ * 
+ * @return string 
+ */
 function mkfm_format_folder ( $folder ) {
     $return  = "<li class='text-center'><a class='folder' href='#'>";
     $return .= "<img class='icon' value='". mkfm_get_file_key( $folder ) . "' src='" . FILE_MANAGER_URL;
@@ -39,6 +60,19 @@ function mkfm_format_folder ( $folder ) {
     return $return;
 }
 
+/**
+ * mkfm_format_file
+ *
+ * Returns file html list structure with accompanying modal
+ *
+ * @since 1.0.0
+ * @access public
+ * 
+ * @param string $file Contains the path to file
+ * @param integer $counter Counter to map <li> id to modal
+ * 
+ * @return array 
+ */
 function mkfm_format_file ( $file, $counter ) {
     $return  = "<li class='text-center file'><a href='#' data-reveal-id='file-". $counter ."'>";
     $return .= "<img class='icon' src='" . FILE_MANAGER_URL . "public/assets/img/txt.png' alt='file'>";
@@ -48,16 +82,32 @@ function mkfm_format_file ( $file, $counter ) {
     return $return;
 }
 
+/**
+ * mkfm_create_breadcrumb
+ *
+ * Returns a multi-dimentional array containing
+ * folder and file html structures.
+ *
+ * @since 1.0.0
+ * @access public
+ * 
+ * @see mkfm_get_file_key
+ * @see mkfm_sanatize_path_for_breadcrumb
+ * 
+ * @param string $full_path Contains the full path for the current directory
+ * 
+ * @return string
+ */
 function mkfm_create_breadcrumb( $full_path ) {
    
-    $breadcrumb = '<div class="breadcrumb"><a class="breadcrumb-link" value="' . DOCUMENT_ROOT . '" href="#">Home</a><span> &raquo; </span>';
+    $breadcrumb = '<div class="breadcrumb"><a class="breadcrumb-link" value="' . mkfm_get_file_key( DOCUMENT_ROOT ) . '" href="#">Home</a><span> &raquo; </span>';
     $running_full_path = DOCUMENT_ROOT;
     $paths = mkfm_sanitize_path_for_breadcrumb( $full_path );
     if ( $paths !== '' || $paths !== null ) {
         foreach ( $paths as $path ) {
             if ( $path !== '' || $path != null ) {
                 $running_full_path .= '/' . $path;
-                $breadcrumb .= '<a class="breadcrumb-link" value="' . $running_full_path . '" href="#">' . $path . '</a><span> &raquo; </span>';
+                $breadcrumb .= '<a class="breadcrumb-link" value="' . mkfm_get_file_key( $running_full_path ). '" href="#">' . $path . '</a><span> &raquo; </span>';
             }
         }
     }
@@ -65,6 +115,18 @@ function mkfm_create_breadcrumb( $full_path ) {
     return $breadcrumb;
 }
 
+/**
+ * mkfm_sanatize_path_for_breadcrumb
+ *
+ * Returns array of directory path
+ *
+ * @since 1.0.0
+ * @access public
+ * 
+ * @param string $full_path Contains the path of the current directory
+ * 
+ * @return array 
+ */
 function mkfm_sanitize_path_for_breadcrumb( $full_path ) {
     //Remove the obligatory document root for easier parsing
     $full_path = str_replace( DOCUMENT_ROOT, '', $full_path );
